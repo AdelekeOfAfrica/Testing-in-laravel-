@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 
@@ -23,7 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/product',[ProductController::class,'index']);
+Route::get('/product',[ProductController::class,'index'])->name('product.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
