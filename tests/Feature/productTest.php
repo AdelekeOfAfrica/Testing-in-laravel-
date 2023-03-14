@@ -21,7 +21,7 @@ class productTest extends TestCase
 
       $this->product =Product::factory()->create();
 
-      $this->user = User::factory()->create();
+      $this->user = User::factory()->create(['is_admin'=> 1]);
 
 
    }
@@ -128,8 +128,8 @@ class productTest extends TestCase
          public function test_if_unauth_user_can_visit_link_page(){
          
             $response = $this->get('/product/create');
-            $response->assertStatus(302);
-            $response->assertRedirect('/login');
+            $response->assertStatus(403);
+          
            }
     
 

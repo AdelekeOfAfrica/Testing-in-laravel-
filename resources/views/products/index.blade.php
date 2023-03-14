@@ -1,6 +1,8 @@
 <x-guest-layout>
    @auth()
-   <a href="#">create</a>
+      @if(auth()->user()->is_admin)
+         <a href="#">create</a>
+      @endif
    @endauth
    @forelse($products as $product )
    {{$product->name}}
