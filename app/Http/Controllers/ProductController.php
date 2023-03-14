@@ -28,6 +28,8 @@ class ProductController extends Controller
     public function create()
     {
         //
+
+    return view('products.create');
     }
 
     /**
@@ -39,6 +41,9 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+         Product::create($request->all());
+        
+        return to_route('product.store');
     }
 
     /**
@@ -58,9 +63,12 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Product $product, Request $request)
     {
         //
+        
+        return view('products.edit', compact('product'));
+    
     }
 
     /**
@@ -73,6 +81,13 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+        $validated = $request->validate([
+            'name' => ['required'],
+            'type' => ['required'],
+            'price' => ['required']
+        ]);
+        $product->update($validated);
+        return to_route('product.index');
     }
 
     /**
@@ -84,5 +99,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+        
+        $product->delete();
+        
     }
 }
